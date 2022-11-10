@@ -1,0 +1,28 @@
+{
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "serve": "vitepress serve docs",
+    "crawler": "bash scripts/crawler.sh"
+  },
+  "name": "huyikai-site",
+  "version": "1.0.0",
+  "description": "huyikai site",
+  "main": "index.js",
+  "type": "module",
+  "repository": "https://github.com/huyikai/mySite.git",
+  "author": "huyikai",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "vitepress": "^1.0.0-alpha.19",
+    "vitepress-plugin-fetch-docs": "^0.0.6",
+    "vitepress-plugin-nav": "^0.0.1",
+    "vitepress-plugin-sidebar": "^0.0.1",
+    "vue": "^3.2.40"
+  },
+  "dependencies": {
+    "blueimp-md5": "^2.19.0",
+    "gitalk": "^1.8.0"
+  }
+}

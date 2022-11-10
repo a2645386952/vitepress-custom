@@ -1,0 +1,15 @@
+{
+    "index_name": "blog",
+    "start_urls": [
+        "https://huyikai.xyz"
+    ],
+    "selectors": {
+        "lvl0": ".vp-doc h1",
+        "lvl1": ".vp-doc h1",
+        "lvl2": ".vp-doc h3",
+        "lvl3": ".vp-doc h4",
+        "lvl4": ".vp-doc h5",
+        "lvl5": ".vp-doc h6",
+        "text": ".vp-doc p,.vp-doc section p,.vp-doc section ol,.vp-doc section ul li"
+    }
+}

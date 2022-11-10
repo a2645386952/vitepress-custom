@@ -1,0 +1,20 @@
+{
+  "name": "vitepress-plugin-sidebar",
+  "version": "0.0.1",
+  "description": "Automatic generate the sidebar based on the file directory",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "vitepress-plugin-sidebar",
+    "vitepress-plugin",
+    "vitepress"
+  ],
+  "author": "huyikai",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  }
+}
