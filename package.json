@@ -8,6 +8,9 @@
   "author": "huyikai",
   "type": "module",
   "main": "index.js",
+  "workspaces": [
+    "packages/@vitepress-custom/*"
+  ],
   "scripts": {
     "build": "vitepress build example",
     "crawler": "bash scripts/crawler.sh",
