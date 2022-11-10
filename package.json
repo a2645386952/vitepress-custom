@@ -1,5 +1,5 @@
 {
-  "private": false,
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/huyikai/vitepress-custom"
@@ -13,7 +13,6 @@
   ],
   "scripts": {
     "build": "vitepress build example",
-    "crawler": "bash scripts/crawler.sh",
     "dev": "vitepress dev example",
     "serve": "vitepress serve example"
   },
@@ -23,7 +22,7 @@
   },
   "devDependencies": {
     "@vitepress-custom/vitepress-plugin-fetch-docs": "^0.0.2",
-    "@vitepress-custom/vitepress-plugin-nav": "^0.0.2",
+    "@vitepress-custom/vitepress-plugin-nav": "^0.0.3",
     "@vitepress-custom/vitepress-plugin-sidebar": "^0.0.2",
     "sass": "^1.56.1",
     "vitepress": "^1.0.0-alpha.19",

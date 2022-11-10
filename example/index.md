@@ -26,6 +26,6 @@ features:
 
 
 <script setup>
-  import { useData } from 'vitepress';
-  console.log("useData()",useData().theme.value)
+  import {useData} from 'vitepress';
+  console.log(useData())
 </script>

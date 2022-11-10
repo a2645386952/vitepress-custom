@@ -3,7 +3,7 @@ export const navParser = (list: Array<{ relativePath: string; }> = [], root: str
     function buildNav(contents) {
         let list: any = [];
         for (let a of contents) {
-            let regularPath = a.regularPath.replace(`/docs/${root}/`, '');
+            let regularPath = a.regularPath.split(`${root}/`)[1];
             let urls = regularPath.split('/');
             for (let i = 0, len = urls.length; i < len; i++) {
                 let b = urls[i];
