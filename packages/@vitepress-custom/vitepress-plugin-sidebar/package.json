@@ -1,20 +1,28 @@
 {
   "name": "@vitepress-custom/vitepress-plugin-sidebar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Automatic generate the sidebar based on the file directory",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "build": "tsc"
-  },
   "keywords": [
     "vitepress-plugin-sidebar",
     "vitepress-plugin",
     "vitepress-custom",
     "vitepress"
   ],
-  "author": "huyikai",
+  "homepage": "https://github.com/huyikai/vitepress-custom",
+  "bugs": {
+    "url": "https://github.com/huyikai/vitepress-custom/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huyikai/vitepress-custom"
+  },
   "license": "MIT",
+  "author": "huyikai",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "typescript": "^4.8.4"
   }

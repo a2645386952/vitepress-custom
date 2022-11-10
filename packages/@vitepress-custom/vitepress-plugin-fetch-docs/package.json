@@ -1,6 +1,6 @@
 {
   "name": "@vitepress-custom/vitepress-plugin-fetch-docs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "Get all the contents of the vitepresss document",
   "keywords": [
@@ -11,6 +11,14 @@
     "vuepress",
     "docs"
   ],
+  "homepage": "https://github.com/huyikai/vitepress-custom",
+  "bugs": {
+    "url": "https://github.com/huyikai/vitepress-custom/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huyikai/vitepress-custom"
+  },
   "license": "MIT",
   "author": "huyikai",
   "type": "module",
