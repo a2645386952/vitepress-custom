@@ -1,24 +1,23 @@
 {
-  "name": "vitepress-plugin-fetch-docs",
-  "version": "0.0.6",
+  "name": "@vitepress-custom/vitepress-plugin-fetch-docs",
+  "version": "0.0.1",
+  "private": false,
   "description": "Get all the contents of the vitepresss document",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
-    "vitepress",
-    "vuepress",
     "vitepress-plugin",
     "vitepress-plugin-fetch-docs",
     "vitepress-fetch-docs",
-    "fetch-docs",
+    "vitepress",
+    "vuepress",
     "docs"
   ],
-  "private": false,
-  "author": "huyikai",
   "license": "MIT",
+  "author": "huyikai",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "fs-extra": "^10.1.0",
     "globby": "^11.0.1",

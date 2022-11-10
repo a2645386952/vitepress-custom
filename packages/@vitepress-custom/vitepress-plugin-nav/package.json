@@ -1,15 +1,16 @@
 {
-  "name": "vitepress-plugin-sidebar",
+  "name": "@vitepress-custom/vitepress-plugin-nav",
   "version": "0.0.1",
-  "description": "Automatic generate the sidebar based on the file directory",
+  "description": "Automatic generate the navigation bar based on the file directory",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "build": "tsc"
   },
   "keywords": [
-    "vitepress-plugin-sidebar",
+    "vitepress-plugin-nav",
     "vitepress-plugin",
+    "vitepress-custom",
     "vitepress"
   ],
   "author": "huyikai",

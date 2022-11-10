@@ -1,6 +1,6 @@
-import navParser from "vitepress-plugin-nav";
-import sidebar from "vitepress-plugin-sidebar";
-import docsData from 'vitepress-plugin-fetch-docs';
+import navParser from "@vitepress-custom/vitepress-plugin-nav";
+import sidebar from "@vitepress-custom/vitepress-plugin-sidebar";
+import docsData from '@vitepress-custom/vitepress-plugin-fetch-docs';
 export default async () => {
     let pages = await docsData();
     return {
