@@ -1,3 +1,10 @@
+interface childrenItem {
+    text: string,
+    key: string,
+    parent: string | undefined;
+    link?: string;
+    items: childrenItem;
+}
 export const sidebarParser = (pages: any, root: string = 'docs') => {
     let rootNameList: any = [];
     let childrenList: any = [];
@@ -17,7 +24,7 @@ export const sidebarParser = (pages: any, root: string = 'docs') => {
             childrenList.push(obj);
         }
     }
-    rootNameList = rootNameList.filter(i => i !== '/');
+    rootNameList = rootNameList.filter((i: any) => i !== '/');
     rootNameList.sort();
     // compare
     function compare(obj1: any, obj2: any) {
@@ -41,16 +48,16 @@ export const sidebarParser = (pages: any, root: string = 'docs') => {
     let obj: any = {};
     for (let c of rootNameList) {
         obj[c] = [{
-            text: c.split('/').filter(i => i).splice(-1, 1)[0],
-            key: c.split('/').filter(i => i).splice(-1, 1)[0],
+            text: c.split('/').filter((i: any) => i).splice(-1, 1)[0],
+            key: c.split('/').filter((i: any) => i).splice(-1, 1)[0],
             parentKey: undefined
         }];
     }
     for (let t in obj) {
         parseList(obj[t][0]);
     }
-    function parseList(item: any) {
-        let children = childrenList.filter(i => item.key === i.parentKey);
+    function parseList(item: childrenItem) {
+        let children = childrenList.filter((i: any) => item.key === i.parentKey);
         children = unique(children, 'key');
         if (children) {
             for (let a of children) {

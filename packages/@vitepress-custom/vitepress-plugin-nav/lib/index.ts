@@ -17,7 +17,7 @@ export const navParser = (list: Array<{ relativePath: string; }> = [], root: str
             }
         }
         // 排序
-        var compare = function (obj1, obj2) {
+        var compare = function (obj1: any, obj2: any) {
             var val1 = obj1.link;
             var val2 = obj2.link;
             if (val1 < val2) {
@@ -30,21 +30,21 @@ export const navParser = (list: Array<{ relativePath: string; }> = [], root: str
         };
         list = list.sort(compare);
         // filter all content that has parent 
-        let childrenList = list.filter(i => i.text.indexOf('.html') >= 0 || i.parent);
+        let childrenList = list.filter((i: any) => i.text.indexOf('.html') >= 0 || i.parent);
         // Remove duplicate content
         function uniqueFunc(arr: any, uniId: any) {
             const res = new Map();
-            return arr.filter((item) => !res.has(item[uniId]) && res.set(item[uniId], 1));
+            return arr.filter((item: any) => !res.has(item[uniId]) && res.set(item[uniId], 1));
         }
         childrenList = uniqueFunc(childrenList, 'key');
         // 根目录
-        let rootList: any = list.filter(i => !i.parent);
+        let rootList: any = list.filter((i: any) => !i.parent);
         rootList = uniqueFunc(rootList, 'key');//去重
-        rootList.map(item => {
+        rootList.map((item: any) => {
             parseList(item);
         });
-        function parseList(parent): any {
-            let children = childrenList.filter(i => i.parent === parent.key);
+        function parseList(parent: any): any {
+            let children = childrenList.filter((i: any) => i.parent === parent.key);
             if (children.length > 0) {
                 delete parent.link;
                 for (let item of children) {
