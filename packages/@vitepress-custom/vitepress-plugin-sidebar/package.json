@@ -1,6 +1,6 @@
 {
   "name": "@vitepress-custom/vitepress-plugin-sidebar",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Automatic generate the sidebar based on the file directory",
   "keywords": [
     "vitepress-plugin-sidebar",
@@ -20,6 +20,10 @@
   "author": "huyikai",
   "type": "module",
   "main": "index.js",
+  "files": [
+    "dist",
+    "index.js"
+  ],
   "scripts": {
     "build": "tsc"
   },

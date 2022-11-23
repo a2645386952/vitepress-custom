@@ -10,7 +10,7 @@ let compareDate = function (obj1, obj2) {
 // 获取所有md文件
 export default async () => {
     const paths = await globby(["**.md"], {
-        ignore: ["node_modules", "README.md"],//忽略文件
+        ignore: ["node_modules", "README.md","packages"],//忽略文件
     });
     let pages = await Promise.all(
         paths.map(async (item) => {

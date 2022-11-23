@@ -1,6 +1,6 @@
 {
   "name": "@vitepress-custom/vitepress-plugin-nav",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "description": "Automatic generate the navigation bar based on the file directory",
   "keywords": [
     "vitepress-plugin-nav",
@@ -20,6 +20,10 @@
   "author": "huyikai",
   "type": "module",
   "main": "index.js",
+  "files": [
+    "dist",
+    "index.js"
+  ],
   "scripts": {
     "build": "tsc"
   },

@@ -1,12 +1,11 @@
-export const sidebarParser = (pages: any) => {
+export const sidebarParser = (pages: any, root: string = 'docs') => {
     let rootNameList: any = [];
     let childrenList: any = [];
     for (let a of pages) {
         // generate root dir name list
-        let rootName = a.regularPath.replace('docs/', '').split('/').filter((i:any, n:number) => i.indexOf('.html') < 0 && n < 4).join('/') + '/';
+        let rootName = a.regularPath.replace(`${root}/`, '').split('/').filter((i: any, n: number) => i.indexOf('.html') < 0 && n < 4).join('/') + '/';
         rootNameList.push(rootName);
-
-        let urls = a.regularPath.replace('/docs/', '').split('/');
+        let urls = a.regularPath.replace(`/${root}/`, '').split('/');
         for (let i = 0, len = urls.length; i < len; i++) {
             let b = urls[i];
             let obj = {
@@ -61,6 +60,5 @@ export const sidebarParser = (pages: any) => {
             item.items = children;
         }
     }
-
     return obj;
 };

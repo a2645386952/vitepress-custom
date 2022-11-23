@@ -24,7 +24,7 @@ export default async () => {
                 }
             ],
             // 侧边栏
-            sidebar: sidebar(pages, 'example'),
+            sidebar: sidebar(pages),
             // 社交链接
             socialLinks: [
                 { icon: 'github', link: 'https://github.com/huyikai/vitepress-custom' }

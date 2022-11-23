@@ -1,17 +1,18 @@
 ---
-layout: home
+layout: custom
+aside: false
 
 hero:
-  name: vitepress-custom
-  text: vitepress-custom
-  tagline: vitepress-custom
+  name: Vitepress-Custom
+  text: Custom
+  tagline: Simple and Customizable
   image:
     src: /static/logo.svg
     alt: myLogo
   actions:
     - theme: brand
-      text: About Me
-      link: about.md
+      text: Example
+      link: https://huyikai.xyz
 features:
   - icon: ⚙️
     title: Auto
@@ -24,8 +25,12 @@ features:
     details: 如果你还是想花点时间定制
 ---
 
+## Usage
+```shell
+npm install vitepress-custom
+```
 
 <script setup>
   import {useData} from 'vitepress';
-  console.log(useData())
+  import test from "@theme"
 </script>
