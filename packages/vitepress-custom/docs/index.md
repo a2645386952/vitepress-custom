@@ -5,7 +5,8 @@ aside: false
 
 ## Usage
 ```shell
-npm install vitepress-custom
+npm install vitepress-custom-cli -g
+vitepress-custom create <project-name>
 ```
 
 <script setup>
