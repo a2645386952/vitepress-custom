@@ -1,6 +1,6 @@
 {
   "name": "@vitepress-custom/vitepress-plugin-fetch-docs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "Get all the contents of the vitepresss document",
   "keywords": [
@@ -30,5 +30,8 @@
     "fs-extra": "^10.1.0",
     "globby": "^11.0.1",
     "gray-matter": "^4.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

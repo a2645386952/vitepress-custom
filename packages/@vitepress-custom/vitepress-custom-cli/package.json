@@ -1,0 +1,39 @@
+{
+  "name": "@vitepress-custom/vitepress-custom-cli",
+  "version": "0.0.1",
+  "description": "vitepress-custom-cli",
+  "keywords": [
+    "vitepress-custom",
+    "cli"
+  ],
+  "homepage": "https://github.com/huyikai/vitepress-custom",
+  "bugs": {
+    "url": "https://github.com/huyikai/vitepress-custom/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huyikai/vitepress-custom"
+  },
+  "license": "ISC",
+  "author": "huyikai",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "vitepress-custom": "bin/cli.js"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "chalk": "^5.1.2",
+    "commander": "^9.4.1",
+    "figlet": "^1.5.2",
+    "fs-extra": "^10.1.0",
+    "inquirer": "^9.1.4",
+    "ora": "^6.1.2",
+    "path": "^0.12.7"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
