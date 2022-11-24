@@ -58,7 +58,7 @@ export default async function (name, options) {
                 process.exit();
             }
 
-            fs.ensureDir(`${targetDir}`);
+            // fs.ensureDir(`${targetDir}`);
             fs.copySync(`${tempDir}/packages/vitepress-custom`, `${targetDir}`);
             fs.removeSync(`${targetDir}/.git`);//删除 .git 文件夹
             fs.removeSync(`${tempDir}`);//删除temp文件夹

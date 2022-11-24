@@ -21,14 +21,13 @@ program
         create(name, options);
     });
 
-
-function getPackage() {
-    return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json')));
-}
-program
-    // 配置版本信息
-    .version(`v${getPackage().version}`, '-v, --version', 'output the current version')
-    .usage('<command> [option]');// 帮助信息提示
+// function getPackage() {
+//     return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json')));
+// }
+// program
+//     // 配置版本信息
+//     .version(`v${getPackage().version}`, '-v, --version', 'output the current version')
+//     .usage('<command> [option]');// 帮助信息提示
 
 program
     .on('--help', () => {
