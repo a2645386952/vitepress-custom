@@ -4,31 +4,56 @@ import fs from "fs-extra";
 import path from "path";
 import chalk from 'chalk';
 import figlet from 'figlet';
+import inquirer from 'inquirer';
 
 // create
 import create from '../lib/create.js';
 
 // "commander" is a complete solution for node.js command-line interfaces.
+// https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md
 import { Command } from 'commander';
 const program = new Command();
+// 初始化
 program
-    // 定义命令和参数
-    .command('create <app-name>')
-    .description('create a new project')
-    // -f or --force 为强制创建，如果创建的目录存在则直接覆盖
-    .option('-f, --force', 'overwrite target directory if it exist')
-    .action((name, options) => {
-        create(name, options);
+    .command('init')
+    .description("inittittiit")
+    .action(async (name, options) => {
+        let answers = await inquirer.prompt([{
+            name: 'name',
+            message: 'Project Name',
+            type: 'input',
+            default: 'vitepress-custom'
+        }, {
+            name: 'author',
+            description: '12313asf',
+            message: 'Author',
+            default: 'huyikai'
+        }, {
+            name: 'newDir',
+            message: 'Create a new directory?',
+            type: "list",
+            choices: [{ name: 'yes', value: true }, { name: 'no', value: false }]
+        }]);
+        console.log(answers);
+        create(answers);
     });
+// program
+//     // 定义命令和参数
+//     .command('create <app-name>')
+//     .description('create a new project')
+//     // -f or --force 为强制创建，如果创建的目录存在则直接覆盖
+//     .option('-f, --force', 'overwrite target directory if it exist')
+//     .action((name, options) => {
+//         create(name, options);
+//     });
 
 // function getPackage() {
 //     return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json')));
 // }
-// program
-//     // 配置版本信息
-//     .version(`v${getPackage().version}`, '-v, --version', 'output the current version')
-//     .usage('<command> [option]');// 帮助信息提示
-
+program
+    // 配置版本信息
+    // .version(`v${getPackage().version}`, '-v, --version', 'output the current version')
+    .usage('<command> [option]');// 帮助信息提示
 program
     .on('--help', () => {
         // print logo

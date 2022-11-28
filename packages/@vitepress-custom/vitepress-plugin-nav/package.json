@@ -3,10 +3,11 @@
   "version": "0.0.6",
   "description": "Automatic generate the navigation bar based on the file directory",
   "keywords": [
-    "vitepress-plugin-nav",
-    "vitepress-plugin",
+    "vite",
+    "vitepress",
     "vitepress-custom",
-    "vitepress"
+    "vitepress-plugin",
+    "vitepress-plugin-nav"
   ],
   "homepage": "https://github.com/huyikai/vitepress-custom",
   "bugs": {

@@ -3,66 +3,63 @@ import path from "path";
 import inquirer from 'inquirer';
 import { exec } from "child_process";
 import ora from 'ora';
-export default async function (name, options) {
+export default async function (answers) {
+    // 解构输入信息：项目名、作者、是否新建目录
+    const { name, author, newDir } = answers;
+    console.log('name,author,newDir', name, author, newDir);
+    // 获取当前工作目录
     const cwd = process.cwd();
-    // 需要创建的目录地址
-    const targetDir = path.join(cwd, name);
+    // 要创建的目录地址
+    const targetDir = path.join(cwd, newDir ? name : '');
     const tempDir = path.join(cwd, 'tempDownload');
-    fs.removeSync(`${tempDir}`);//删除temp文件夹
-    // 目录是否已经存在？
-    if (fs.existsSync(targetDir)) {
-
-        // 是否为强制创建？
-        if (options.force) {
-            await fs.remove(targetDir);
-        } else {
-            // TODO：询问用户是否确定要覆盖
-            // 询问用户是否确定要覆盖
-            let { action } = await inquirer.prompt([
-                {
-                    name: 'action',
-                    type: 'list',
-                    message: 'Target directory already exists Pick an action:',
-                    choices: [
-                        {
-                            name: 'Overwrite',
-                            value: 'overwrite'
-                        }, {
-                            name: 'Cancel',
-                            value: false
-                        }
-                    ]
-                }
-            ]);
-            if (!action) {
-                return;
-            } else if (action === 'overwrite') {
+    fs.removeSync(tempDir);//删除temp文件夹
+    console.log('targetDir', targetDir);
+    if (newDir && fs.existsSync(targetDir)) {
+        inquirer.prompt([
+            {
+                name: 'action',
+                type: 'list',
+                message: 'Target directory already exists Pick an action:',
+                choices: [
+                    {
+                        name: 'Overwrite',
+                        value: 'overwrite'
+                    }, {
+                        name: 'Cancel',
+                        value: false
+                    }
+                ]
+            }
+        ]).then(res => {
+            if (res.action === 'overwrite') {
                 // 移除已存在的目录
-                console.log(`\r\nRemoving...`);
                 fs.removeSync(targetDir);
-                console.log(`\r\nRemoved`);
+                fs.removeSync(tempDir);
                 generate();
             }
-        }
+            return;
+        });
     } else {
         generate();
     }
 
     function generate() {
+        console.log("generate");
         const spinner = ora('Cloning...').start();
-        const url = 'https://github.com/huyikai/vitepress-custom';
-        const branch = 'master';
+        // const url = 'https://github.com/huyikai/vitepress-custom/.';
+        const url = 'https://gitee.com/ryougi-shi-ki/ued-background-page-exercise.git';
+        // const branch = 'master';
+        const branch = 'dev';
         exec(`git clone ${url} ${tempDir} && cd ${tempDir} && git checkout ${branch}`, (error, stdout, stderr) => {
             if (error) {
                 console.log("error", error);
                 process.exit();
             }
-
-            // fs.ensureDir(`${targetDir}`);
-            fs.copySync(`${tempDir}/packages/vitepress-custom`, `${targetDir}`);
+            fs.ensureDir(tempDir);
+            fs.copySync(`${tempDir}/`, `${targetDir}`);
             fs.removeSync(`${targetDir}/.git`);//删除 .git 文件夹
-            fs.removeSync(`${tempDir}`);//删除temp文件夹
-            spinner.succeed('Complete');
+            fs.removeSync(tempDir);//删除temp文件夹
+            spinner.succeed('\r\nComplete');
             process.exit();
         });
     }

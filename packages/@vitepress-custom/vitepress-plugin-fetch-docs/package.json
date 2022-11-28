@@ -4,11 +4,13 @@
   "private": false,
   "description": "Get all the contents of the vitepresss document",
   "keywords": [
-    "vitepress-plugin",
-    "vitepress-plugin-fetch-docs",
-    "vitepress-fetch-docs",
+    "vite",
     "vitepress",
     "vuepress",
+    "vitepress-plugin",
+    "vitepress-custom",
+    "vitepress-plugin-fetch-docs",
+    "vitepress-fetch-docs",
     "docs"
   ],
   "homepage": "https://github.com/huyikai/vitepress-custom",

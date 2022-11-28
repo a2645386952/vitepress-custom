@@ -3,10 +3,11 @@
   "version": "0.0.4",
   "description": "Automatic generate the sidebar based on the file directory",
   "keywords": [
-    "vitepress-plugin-sidebar",
-    "vitepress-plugin",
+    "vite",
+    "vitepress",
     "vitepress-custom",
-    "vitepress"
+    "vitepress-plugin",
+    "vitepress-plugin-sidebar"
   ],
   "homepage": "https://github.com/huyikai/vitepress-custom",
   "bugs": {
