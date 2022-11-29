@@ -9,6 +9,7 @@ import { inject } from 'vue';
 const route = useRoute();
 const { frontmatter } = useData();
 const { hasSidebar } = useSidebar();
+
 const NotFound = inject('NotFound');
 </script>
 

@@ -1,5 +1,7 @@
 # VitePress-Custom
 
+[简体中文](./README-zh.md)
+
 ## Brief
 Added some features on the basis of  [vitepress](https://vitepress.vuejs.org)
 
