@@ -1,19 +1,18 @@
 import fs from "fs-extra";
 import path from "path";
 import inquirer from 'inquirer';
-import { exec } from "child_process";
+import download from "download-git-repo";
 import ora from 'ora';
+
+// 获取当前工作目录
+const cwd = process.cwd();
+const spinner = ora();
 export default async function (answers) {
     // 解构输入信息：项目名、作者、是否新建目录
     const { name, author, newDir } = answers;
-    console.log('name,author,newDir', name, author, newDir);
-    // 获取当前工作目录
-    const cwd = process.cwd();
     // 要创建的目录地址
     const targetDir = path.join(cwd, newDir ? name : '');
-    const tempDir = path.join(cwd, 'tempDownload');
-    fs.removeSync(tempDir);//删除temp文件夹
-    console.log('targetDir', targetDir);
+    // 新建目录&目录已存在
     if (newDir && fs.existsSync(targetDir)) {
         inquirer.prompt([
             {
@@ -32,9 +31,8 @@ export default async function (answers) {
             }
         ]).then(res => {
             if (res.action === 'overwrite') {
-                // 移除已存在的目录
+                // 移除已存在目录
                 fs.removeSync(targetDir);
-                fs.removeSync(tempDir);
                 generate();
             }
             return;
@@ -43,24 +41,26 @@ export default async function (answers) {
         generate();
     }
 
-    function generate() {
-        console.log("generate");
-        const spinner = ora('Cloning...').start();
-        // const url = 'https://github.com/huyikai/vitepress-custom/.';
-        const url = 'https://gitee.com/ryougi-shi-ki/ued-background-page-exercise.git';
-        // const branch = 'master';
-        const branch = 'dev';
-        exec(`git clone ${url} ${tempDir} && cd ${tempDir} && git checkout ${branch}`, (error, stdout, stderr) => {
+    // 生成
+    async function generate() {
+        spinner.start('Downloading template...');
+        const repositoryUrl = 'vitepress-custom/vitepress-custom-template';
+        const branch = 'master';
+        downloadRepository(repositoryUrl, branch);
+    }
+    // 下载储存库代码
+    function downloadRepository(repositoryUrl, branch) {
+        download(`${repositoryUrl}#${branch}`, targetDir, function (error) {
             if (error) {
                 console.log("error", error);
-                process.exit();
+                // 5 秒后重新下载
+                setTimeout(() => {
+                    downloadRepository();
+                }, 5000);
+            } else {
+                // 下载成功
+                spinner.succeed('Complete');
             }
-            fs.ensureDir(tempDir);
-            fs.copySync(`${tempDir}/`, `${targetDir}`);
-            fs.removeSync(`${targetDir}/.git`);//删除 .git 文件夹
-            fs.removeSync(tempDir);//删除temp文件夹
-            spinner.succeed('\r\nComplete');
-            process.exit();
         });
     }
 };

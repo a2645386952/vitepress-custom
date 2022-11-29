@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-
-import fs from "fs-extra";
-import path from "path";
 import chalk from 'chalk';
 import figlet from 'figlet';
 import inquirer from 'inquirer';
@@ -13,28 +10,29 @@ import create from '../lib/create.js';
 // https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md
 import { Command } from 'commander';
 const program = new Command();
+// 问题
+const question = [{
+    name: 'name',
+    message: 'Project Name',
+    type: 'input',
+    default: 'vitepress-custom'
+}, {
+    name: 'author',
+    description: '12313asf',
+    message: 'Author',
+    default: 'huyikai'
+}, {
+    name: 'newDir',
+    message: 'Create a new directory?',
+    type: "list",
+    choices: [{ name: 'yes', value: true }, { name: 'no', value: false }]
+}];
 // 初始化
 program
     .command('init')
     .description("inittittiit")
     .action(async (name, options) => {
-        let answers = await inquirer.prompt([{
-            name: 'name',
-            message: 'Project Name',
-            type: 'input',
-            default: 'vitepress-custom'
-        }, {
-            name: 'author',
-            description: '12313asf',
-            message: 'Author',
-            default: 'huyikai'
-        }, {
-            name: 'newDir',
-            message: 'Create a new directory?',
-            type: "list",
-            choices: [{ name: 'yes', value: true }, { name: 'no', value: false }]
-        }]);
-        console.log(answers);
+        let answers = await inquirer.prompt(question);
         create(answers);
     });
 // program
