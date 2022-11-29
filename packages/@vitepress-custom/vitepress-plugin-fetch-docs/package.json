@@ -1,6 +1,6 @@
 {
   "name": "@vitepress-custom/vitepress-plugin-fetch-docs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "description": "Get all the contents of the vitepresss document",
   "keywords": [
@@ -13,25 +13,34 @@
     "vitepress-fetch-docs",
     "docs"
   ],
-  "homepage": "https://github.com/huyikai/vitepress-custom",
+  "homepage": "https://github.com/vitepress-custom/vitepress-custom",
   "bugs": {
-    "url": "https://github.com/huyikai/vitepress-custom/issues"
+    "url": "https://github.com/vitepress-custom/vitepress-custom/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/huyikai/vitepress-custom"
+    "url": "https://github.com/vitepress-custom/vitepress-custom"
   },
   "license": "MIT",
   "author": "huyikai",
   "type": "module",
   "main": "index.js",
+  "files": [
+    "dist",
+    "index.js"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "dependencies": {
     "fs-extra": "^10.1.0",
     "globby": "^11.0.1",
     "gray-matter": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^18.11.9",
+    "typescript": "^4.8.4"
   },
   "publishConfig": {
     "access": "public"
