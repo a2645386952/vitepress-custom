@@ -4,6 +4,11 @@
     "type": "git",
     "url": "https://github.com/huyikai/vitepress-custom"
   },
+  "keywords": [
+    "vite",
+    "vitepress",
+    "vitepress-custom"
+  ],
   "license": "MIT",
   "author": "huyikai",
   "type": "module",
@@ -21,9 +26,9 @@
     "gitalk": "^1.8.0"
   },
   "devDependencies": {
-    "@vitepress-custom/vitepress-plugin-fetch-docs": "^0.0.2",
+    "@vitepress-custom/vitepress-plugin-fetch-docs": "^0.0.3",
     "@vitepress-custom/vitepress-plugin-nav": "^0.0.6",
-    "@vitepress-custom/vitepress-plugin-sidebar": "^0.0.3",
+    "@vitepress-custom/vitepress-plugin-sidebar": "^0.0.4",
     "sass": "^1.56.1",
     "vitepress": "^1.0.0-alpha.29",
     "vue": "^3.2.45"
