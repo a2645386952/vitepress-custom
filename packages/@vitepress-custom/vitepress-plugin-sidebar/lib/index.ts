@@ -1,16 +1,16 @@
-interface childrenItem {
-    text: string,
-    key: string,
-    parent: string | undefined;
-    link?: string;
-    items: childrenItem;
-}
-export const sidebarParser = (pages: any, root: string = 'docs') => {
-    let rootNameList: any = [];
+import { childrenItemsType, pagesType } from "../types/index";
+/**
+ * @param pages 
+ * @param root 
+ * @param collapsible 
+ * @returns {Array}
+ */
+export const sidebarParser = (pages: Array<pagesType>, root: string = 'docs', collapsible: boolean = true) => {
+    let rootNameList: Array<string> = [];
     let childrenList: any = [];
     for (let a of pages) {
         // generate root dir name list
-        let rootName = a.regularPath.replace(`${root}/`, '').split('/').filter((i: any, n: number) => i.indexOf('.html') < 0 && n < 4).join('/') + '/';
+        let rootName = a.regularPath.replace(`${root}/`, '').split('/').filter((i: string, n: number) => i.indexOf('.html') < 0 && n < 4).join('/') + '/';
         rootNameList.push(rootName);
         let urls = a.regularPath.replace(`/${root}/`, '').split('/');
         for (let i = 0, len = urls.length; i < len; i++) {
@@ -24,7 +24,7 @@ export const sidebarParser = (pages: any, root: string = 'docs') => {
             childrenList.push(obj);
         }
     }
-    rootNameList = rootNameList.filter((i: any) => i !== '/');
+    rootNameList = rootNameList.filter((i: string) => i !== '/');
     rootNameList.sort();
     // compare
     function compare(obj1: any, obj2: any) {
@@ -40,24 +40,24 @@ export const sidebarParser = (pages: any, root: string = 'docs') => {
     }
     childrenList = childrenList.sort(compare);
     // 去重
-    function unique(arr: any, unikey = '') {
+    function unique(arr: Array<any>, unikey = '') {
         const res: any = new Map();
         return arr.filter((item: any) => !res.has(unikey ? item[unikey] : item) && res.set(unikey ? item[unikey] : item, 1));
     }
     rootNameList = unique(rootNameList);
-    let obj: any = {};
+    let sidebar: any = {};
     for (let c of rootNameList) {
-        obj[c] = [{
+        sidebar[c] = [{
             text: c.split('/').filter((i: any) => i).splice(-1, 1)[0],
             key: c.split('/').filter((i: any) => i).splice(-1, 1)[0],
             parentKey: undefined
         }];
     }
-    for (let t in obj) {
-        parseList(obj[t][0]);
+    for (let t in sidebar) {
+        parseList(sidebar[t][0]);
     }
-    function parseList(item: childrenItem) {
-        let children = childrenList.filter((i: any) => item.key === i.parentKey);
+    function parseList(item: childrenItemsType) {
+        let children = childrenList.filter((i: childrenItemsType) => item.key === i.parentKey);
         children = unique(children, 'key');
         if (children) {
             for (let a of children) {
@@ -65,7 +65,8 @@ export const sidebarParser = (pages: any, root: string = 'docs') => {
             }
             !(item.hasOwnProperty('link') && item.key.indexOf('.html') >= 0) && delete item.link;
             item.items = children;
+            item.collapsible = collapsible;
         }
     }
-    return obj;
+    return sidebar;
 };
