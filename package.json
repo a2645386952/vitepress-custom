@@ -1,6 +1,7 @@
 {
   "name": "vitepress-custom",
-  "version": "0.0.3",
+  "description": "Development based on vitepress",
+  "version": "0.0.4",
   "private": true,
   "keywords": [
     "vite",
