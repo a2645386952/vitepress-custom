@@ -16,6 +16,7 @@ npm run dev
 ```
 
 <script setup>
+  // use useData do something
   import {useData} from 'vitepress';
-  import test from "@theme"
+  console.log(useData())
 </script>
