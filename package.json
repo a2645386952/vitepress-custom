@@ -1,5 +1,6 @@
 {
   "name": "vitepress-custom",
+  "version": "0.0.3",
   "private": true,
   "keywords": [
     "vite",
@@ -8,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/huyikai/vitepress-custom"
+    "url": "https://github.com/vitepress-custom/vitepress-custom"
   },
   "license": "MIT",
   "author": "huyikai",
