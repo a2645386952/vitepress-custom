@@ -52,7 +52,6 @@ export var sidebarParser = function (pages, root, collapsible) {
         return arr.filter(function (item) { return !res.has(unikey ? item[unikey] : item) && res.set(unikey ? item[unikey] : item, 1); });
     }
     rootNameList = unique(rootNameList);
-    console.log('rootNameList', rootNameList);
     var sidebar = {};
     for (var _a = 0, rootNameList_1 = rootNameList; _a < rootNameList_1.length; _a++) {
         var c = rootNameList_1[_a];

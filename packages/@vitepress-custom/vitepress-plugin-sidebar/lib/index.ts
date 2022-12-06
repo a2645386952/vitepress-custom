@@ -48,7 +48,6 @@ export const sidebarParser = (pages: Array<pagesType>, root: string = 'docs', co
         return arr.filter((item: any) => !res.has(unikey ? item[unikey] : item) && res.set(unikey ? item[unikey] : item, 1));
     }
     rootNameList = unique(rootNameList);
-    console.log('rootNameList', rootNameList);
     let sidebar: any = {};
     for (let c of rootNameList) {
         sidebar[c] = [{
