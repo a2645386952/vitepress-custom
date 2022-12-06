@@ -18,7 +18,6 @@ export default async () => {
             // 导航栏
             nav: [
                 ...navParser(pages, 'contents'),
-                ...navParser(pages, 'contents1'),
                 {
                     text: 'Example',
                     link: 'https://huyikai.xyz'
