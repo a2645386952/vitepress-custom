@@ -1,17 +1,17 @@
 export var navParser = function (list, root) {
     if (list === void 0) { list = []; }
     if (root === void 0) { root = ''; }
-    var contents = list.filter(function (i) { return i.relativePath.indexOf("/".concat(root, "/")) >= 0; });
+    var contents = list.filter(function (i) { return i.link.indexOf("".concat(root, "/")) >= 0; });
     function buildNav(contents) {
         var list = [];
         for (var _i = 0, contents_1 = contents; _i < contents_1.length; _i++) {
             var a = contents_1[_i];
-            var regularPath = a.regularPath.split("".concat(root, "/"))[1];
-            var urls = regularPath.split('/');
+            var link = a.link.split("".concat(root, "/"))[1];
+            var urls = link.split('/');
             for (var i = 0, len = urls.length; i < len; i++) {
                 var b = urls[i];
                 var obj = {
-                    text: b.replace('.html', ''),
+                    text: b.replace('.md', ''),
                     key: b,
                     parent: i > 0 ? urls[i - 1] : undefined,
                     link: "/".concat(root, "/").concat(urls.join('/'))
@@ -35,16 +35,16 @@ export var navParser = function (list, root) {
         };
         list = list.sort(compare);
         // filter all content that has parent 
-        var childrenList = list.filter(function (i) { return i.text.indexOf('.html') >= 0 || i.parent; });
+        var childrenList = list.filter(function (i) { return i.parent; });
         // Remove duplicate content
         function uniqueFunc(arr, uniId) {
             var res = new Map();
             return arr.filter(function (item) { return !res.has(item[uniId]) && res.set(item[uniId], 1); });
         }
         childrenList = uniqueFunc(childrenList, 'key');
-        // 根目录
+        // root directory
         var rootList = list.filter(function (i) { return !i.parent; });
-        rootList = uniqueFunc(rootList, 'key'); //去重
+        rootList = uniqueFunc(rootList, 'key'); // unique
         rootList.map(function (item) {
             parseList(item);
         });

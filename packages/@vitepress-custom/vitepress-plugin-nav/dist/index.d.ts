@@ -1,3 +1,3 @@
 export declare const navParser: (list?: Array<{
-    relativePath: string;
+    link: string;
 }>, root?: string) => any;

@@ -10,6 +10,7 @@ interface pageType {
     frontMatter: frontMatterType,
     regularPath: string,
     relativePath: string;
+    content: string;
 }
 interface frontMatterType {
     page: any;
@@ -24,15 +25,15 @@ export default async () => {
         paths.map(async (item: string) => {
             const content = await fs.readFile(item, "utf-8");
             const { data } = matter(content);
+            let matterData = matter(content);
             return {
-                frontMatter: data,
-                regularPath: `/${item.replace(".md", ".html")}`,
-                relativePath: item,
+                frontMatter: matterData.data,
+                link: item,
+                content: matterData.content.replace(/[^a-zA-Z0-9._ ]+/g, '').toLowerCase()
             };
         })
     );
     pages = pages.filter((item: pageType) => !item.frontMatter.page);
-
     pages.sort(compareDate);
     return pages;
 };

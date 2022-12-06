@@ -1,6 +1,6 @@
 {
   "name": "@vitepress-custom/vitepress-plugin-nav",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Automatic generate the navigation bar based on the file directory",
   "keywords": [
     "vite",

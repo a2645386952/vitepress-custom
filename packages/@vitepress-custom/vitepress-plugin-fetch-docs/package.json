@@ -1,6 +1,6 @@
 {
   "name": "@vitepress-custom/vitepress-plugin-fetch-docs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": false,
   "description": "Get all the contents of the vitepresss document",
   "keywords": [

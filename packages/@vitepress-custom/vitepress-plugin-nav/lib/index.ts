@@ -1,14 +1,14 @@
-export const navParser = (list: Array<{ relativePath: string; }> = [], root: string = '') => {
-    let contents: Array<{}> = list.filter(i => i.relativePath.indexOf(`/${root}/`) >= 0);
+export const navParser = (list: Array<{ link: string; }> = [], root: string = '') => {
+    let contents: Array<{}> = list.filter(i => i.link.indexOf(`${root}/`) >= 0);
     function buildNav(contents: any) {
         let list: any = [];
         for (let a of contents) {
-            let regularPath = a.regularPath.split(`${root}/`)[1];
-            let urls = regularPath.split('/');
+            let link = a.link.split(`${root}/`)[1];
+            let urls = link.split('/');
             for (let i = 0, len = urls.length; i < len; i++) {
                 let b = urls[i];
                 let obj = {
-                    text: b.replace('.html', ''),
+                    text: b.replace('.md', ''),
                     key: b,
                     parent: i > 0 ? urls[i - 1] : undefined,
                     link: `/${root}/${urls.join('/')}`
@@ -30,16 +30,18 @@ export const navParser = (list: Array<{ relativePath: string; }> = [], root: str
         };
         list = list.sort(compare);
         // filter all content that has parent 
-        let childrenList = list.filter((i: any) => i.text.indexOf('.html') >= 0 || i.parent);
+        let childrenList = list.filter((i: any) => i.parent);
+
         // Remove duplicate content
         function uniqueFunc(arr: any, uniId: any) {
             const res = new Map();
             return arr.filter((item: any) => !res.has(item[uniId]) && res.set(item[uniId], 1));
         }
         childrenList = uniqueFunc(childrenList, 'key');
-        // 根目录
+
+        // root directory
         let rootList: any = list.filter((i: any) => !i.parent);
-        rootList = uniqueFunc(rootList, 'key');//去重
+        rootList = uniqueFunc(rootList, 'key'); // unique
         rootList.map((item: any) => {
             parseList(item);
         });

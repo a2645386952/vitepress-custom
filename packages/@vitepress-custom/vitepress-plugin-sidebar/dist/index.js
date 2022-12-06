@@ -12,13 +12,15 @@ export var sidebarParser = function (pages, root, collapsible) {
     for (var _i = 0, pages_1 = pages; _i < pages_1.length; _i++) {
         var a = pages_1[_i];
         // generate root dir name list
-        var rootName = a.regularPath.replace("".concat(root, "/"), '').split('/').filter(function (i, n) { return i.indexOf('.html') < 0 && n < 4; }).join('/') + '/';
-        rootNameList.push(rootName);
-        var urls = a.regularPath.replace("/".concat(root, "/"), '').split('/');
+        var rootName = a.link.replace("".concat(root, "/"), '').split('/').filter(function (i, n) { return i.indexOf('.md') < 0 && n < 2; }).join('/');
+        if (rootName.indexOf('/') >= 0) {
+            rootNameList.push(rootName);
+        }
+        var urls = a.link.replace("".concat(root, "/"), '').split('/');
         for (var i = 0, len = urls.length; i < len; i++) {
             var b = urls[i];
             var obj = {
-                text: b.replace('.html', ''),
+                text: b.replace('.md', ''),
                 key: b,
                 parentKey: (i > 0) ? urls[i - 1] : undefined,
                 link: "/".concat(urls.join('/'))
@@ -26,7 +28,7 @@ export var sidebarParser = function (pages, root, collapsible) {
             childrenList.push(obj);
         }
     }
-    rootNameList = rootNameList.filter(function (i) { return i !== '/'; });
+    rootNameList = rootNameList.filter(function (i) { return !['', '/'].includes(i); });
     rootNameList.sort();
     // compare
     function compare(obj1, obj2) {
@@ -50,6 +52,7 @@ export var sidebarParser = function (pages, root, collapsible) {
         return arr.filter(function (item) { return !res.has(unikey ? item[unikey] : item) && res.set(unikey ? item[unikey] : item, 1); });
     }
     rootNameList = unique(rootNameList);
+    console.log('rootNameList', rootNameList);
     var sidebar = {};
     for (var _a = 0, rootNameList_1 = rootNameList; _a < rootNameList_1.length; _a++) {
         var c = rootNameList_1[_a];
@@ -70,9 +73,10 @@ export var sidebarParser = function (pages, root, collapsible) {
                 var a = children_1[_i];
                 parseList(a);
             }
-            !(item.hasOwnProperty('link') && item.key.indexOf('.html') >= 0) && delete item.link;
+            !(item.hasOwnProperty('link') && item.key.indexOf('.md') >= 0) && delete item.link;
             item.items = children;
             item.collapsible = collapsible;
+            item.collapsed = false;
         }
     }
     return sidebar;

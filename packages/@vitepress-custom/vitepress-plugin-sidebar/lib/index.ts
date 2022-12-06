@@ -8,15 +8,18 @@ import { childrenItemsType, pagesType } from "../types/index";
 export const sidebarParser = (pages: Array<pagesType>, root: string = 'docs', collapsible: boolean = true) => {
     let rootNameList: Array<string> = [];
     let childrenList: any = [];
+
     for (let a of pages) {
         // generate root dir name list
-        let rootName = a.regularPath.replace(`${root}/`, '').split('/').filter((i: string, n: number) => i.indexOf('.html') < 0 && n < 4).join('/') + '/';
-        rootNameList.push(rootName);
-        let urls = a.regularPath.replace(`/${root}/`, '').split('/');
+        let rootName = a.link.replace(`${root}/`, '').split('/').filter((i: string, n: number) => i.indexOf('.md') < 0 && n < 2).join('/');
+        if (rootName.indexOf('/') >= 0) {
+            rootNameList.push(rootName);
+        }
+        let urls = a.link.replace(`${root}/`, '').split('/');
         for (let i = 0, len = urls.length; i < len; i++) {
             let b = urls[i];
             let obj = {
-                text: b.replace('.html', ''),
+                text: b.replace('.md', ''),
                 key: b,
                 parentKey: (i > 0) ? urls[i - 1] : undefined,
                 link: `/${urls.join('/')}`
@@ -24,7 +27,7 @@ export const sidebarParser = (pages: Array<pagesType>, root: string = 'docs', co
             childrenList.push(obj);
         }
     }
-    rootNameList = rootNameList.filter((i: string) => i !== '/');
+    rootNameList = rootNameList.filter((i: string) => !['', '/'].includes(i));
     rootNameList.sort();
     // compare
     function compare(obj1: any, obj2: any) {
@@ -45,6 +48,7 @@ export const sidebarParser = (pages: Array<pagesType>, root: string = 'docs', co
         return arr.filter((item: any) => !res.has(unikey ? item[unikey] : item) && res.set(unikey ? item[unikey] : item, 1));
     }
     rootNameList = unique(rootNameList);
+    console.log('rootNameList', rootNameList);
     let sidebar: any = {};
     for (let c of rootNameList) {
         sidebar[c] = [{
@@ -56,6 +60,7 @@ export const sidebarParser = (pages: Array<pagesType>, root: string = 'docs', co
     for (let t in sidebar) {
         parseList(sidebar[t][0]);
     }
+
     function parseList(item: childrenItemsType) {
         let children = childrenList.filter((i: childrenItemsType) => item.key === i.parentKey);
         children = unique(children, 'key');
@@ -63,9 +68,10 @@ export const sidebarParser = (pages: Array<pagesType>, root: string = 'docs', co
             for (let a of children) {
                 parseList(a);
             }
-            !(item.hasOwnProperty('link') && item.key.indexOf('.html') >= 0) && delete item.link;
+            !(item.hasOwnProperty('link') && item.key.indexOf('.md') >= 0) && delete item.link;
             item.items = children;
             item.collapsible = collapsible;
+            item.collapsed = false;
         }
     }
     return sidebar;

@@ -3,11 +3,14 @@ export interface childrenItemsType {
     key: string,
     parentKey: string | undefined;
     link?: string;
-    items: childrenItemsType;
-    collapsible: boolean | undefined;
+    items: childrenItemsType,
+    collapsible: boolean | undefined,
+    collapsed: boolean | undefined;
 }
 export interface pagesType {
     frontMatter: string,
     regularPath: string,
-    relativePath: string;
+    relativePath: string,
+    link: string,
+    content: string;
 }

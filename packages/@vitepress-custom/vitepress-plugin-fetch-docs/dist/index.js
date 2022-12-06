@@ -52,17 +52,18 @@ export default (function () { return __awaiter(void 0, void 0, void 0, function 
             case 1:
                 paths = _a.sent();
                 return [4 /*yield*/, Promise.all(paths.map(function (item) { return __awaiter(void 0, void 0, void 0, function () {
-                        var content, data;
+                        var content, data, matterData;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0: return [4 /*yield*/, fs.readFile(item, "utf-8")];
                                 case 1:
                                     content = _a.sent();
                                     data = matter(content).data;
+                                    matterData = matter(content);
                                     return [2 /*return*/, {
-                                            frontMatter: data,
-                                            regularPath: "/".concat(item.replace(".md", ".html")),
-                                            relativePath: item,
+                                            frontMatter: matterData.data,
+                                            link: item,
+                                            content: matterData.content.replace(/[^a-zA-Z0-9._ ]+/g, '').toLowerCase()
                                         }];
                             }
                         });
