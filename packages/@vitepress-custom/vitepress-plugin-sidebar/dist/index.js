@@ -75,7 +75,7 @@ export var sidebarParser = function (pages, root, collapsible) {
             !(item.hasOwnProperty('link') && item.key.indexOf('.md') >= 0) && delete item.link;
             item.items = children;
             item.collapsible = collapsible;
-            item.collapsed = false;
+            item.collapsed = null;
         }
     }
     return sidebar;

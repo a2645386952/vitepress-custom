@@ -4,13 +4,13 @@ import { useSidebar } from 'vitepress/dist/client/theme-default/composables/side
 import VPPage from 'vitepress/dist/client/theme-default/components/VPPage.vue';
 import VPHome from 'vitepress/dist/client/theme-default/components/VPHome.vue';
 import VPDoc from 'vitepress/dist/client/theme-default/components/VPDoc.vue';
-import { inject } from 'vue';
+import NotFound from 'vitepress/dist/client/theme-default/NotFound.vue'
 
 const route = useRoute();
 const { frontmatter } = useData();
 const { hasSidebar } = useSidebar();
 
-const NotFound = inject('NotFound');
+
 </script>
 
 <template>

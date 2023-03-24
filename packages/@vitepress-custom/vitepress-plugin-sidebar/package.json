@@ -1,6 +1,6 @@
 {
   "name": "@vitepress-custom/vitepress-plugin-sidebar",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Automatic generate the sidebar based on the file directory",
   "keywords": [
     "vite",

@@ -70,7 +70,7 @@ export const sidebarParser = (pages: Array<pagesType>, root: string = 'docs', co
             !(item.hasOwnProperty('link') && item.key.indexOf('.md') >= 0) && delete item.link;
             item.items = children;
             item.collapsible = collapsible;
-            item.collapsed = false;
+            item.collapsed = null;
         }
     }
     return sidebar;

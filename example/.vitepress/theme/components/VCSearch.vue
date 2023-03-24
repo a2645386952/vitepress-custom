@@ -4,7 +4,7 @@ import { useData } from 'vitepress';
 import iconSearch from './icons/iconSearch.vue';
 import iconArrowRight from './icons/iconArrowRight.vue';
 // pages data
-const pages = useData().theme.value.pages.filter(i => i.frontMatter.title);
+const pages = useData().theme.value.pages.filter(i => !['home', 'custom'].includes(i.frontMatter.layout));
 // search pop visible
 const open = ref<boolean>(false);
 const keywords = ref<string>('');
@@ -68,7 +68,7 @@ const hideSearchPopHandle = () => {
                 >
                 <div class="result">
                     <a
-                        :href="item.link.replace('example', '').replace('.md', '')"
+                        :href="item.link.replace('docs', '').replace('.md', '')"
                         @click="hideSearchPopHandle"
                         class="item"
                         v-for="(item, index) in result"
@@ -161,7 +161,7 @@ const hideSearchPopHandle = () => {
     position: absolute;
     top: 20vh;
     z-index: 10;
-    background: var(--vp-c-bg-mute);
+    background: #3d3d3d;
     border-radius: 8px;
     padding: 20px;
     box-sizing: border-box;
