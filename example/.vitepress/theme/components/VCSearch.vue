@@ -4,7 +4,7 @@ import { useData } from 'vitepress';
 import iconSearch from './icons/iconSearch.vue';
 import iconArrowRight from './icons/iconArrowRight.vue';
 // pages data
-const pages = useData().theme.value.pages.filter(i => !['home', 'custom'].includes(i.frontMatter.layout));
+const pages = useData().theme.value.pages.filter((i: { frontMatter: { layout: string; }; }) => !['home', 'custom'].includes(i.frontMatter.layout));
 // search pop visible
 const open = ref<boolean>(false);
 const keywords = ref<string>('');
@@ -38,42 +38,20 @@ const hideSearchPopHandle = () => {
 };
 </script>
 <template>
-    <div
-        class="search-box"
-        @click="showSearchPopHandle"
-    >
+    <div class="search-box" @click="showSearchPopHandle">
         <iconSearch class="icon" />
         <div class="placeholder">Search</div>
     </div>
     <Teleport to="body">
-        <div
-            v-if="open"
-            class="search-pop"
-            :aria-expanded="open"
-        >
-            <div
-                class="pop-mask"
-                @click.stop="hideSearchPopHandle"
-            >
+        <div v-if="open" class="search-pop" :aria-expanded="open">
+            <div class="pop-mask" @click.stop="hideSearchPopHandle">
             </div>
             <div class="search-pop-box">
-                <input
-                    ref="refInput"
-                    class="input"
-                    placeholder="Search Docs"
-                    type="text"
-                    autofocus="true"
-                    v-model="keywords"
-                    @input="inputChange"
-                >
+                <input ref="refInput" class="input" placeholder="Search Docs" type="text" autofocus="true"
+                    v-model="keywords" @input="inputChange">
                 <div class="result">
-                    <a
-                        :href="item.link.replace('docs', '').replace('.md', '')"
-                        @click="hideSearchPopHandle"
-                        class="item"
-                        v-for="(item, index) in result"
-                        :key="index"
-                    >
+                    <a :href="item.link.replace('docs', '').replace('.md', '')" @click="hideSearchPopHandle" class="item"
+                        v-for="(item, index) in result" :key="index">
                         <div class="contents">
                             <div class="title">{{ item.frontMatter.title }}</div>
                             <div class="content">{{ item.content }}</div>
@@ -101,7 +79,7 @@ const hideSearchPopHandle = () => {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    margin-right: 30px;
+    margin: 0 30px;
     transition: border-color 0.25s, background-color 0.25s;
 
     &:hover {
@@ -161,10 +139,12 @@ const hideSearchPopHandle = () => {
     position: absolute;
     top: 20vh;
     z-index: 10;
-    background: #3d3d3d;
+    background: rgba(#3d3d3d, 0.9);
     border-radius: 8px;
     padding: 20px;
     box-sizing: border-box;
+    transition: width 1s ease-in-out;
+    color: rgba(white, 0.7);
 
     .input {
         border: 2px solid var(--vp-c-gray);
@@ -174,6 +154,10 @@ const hideSearchPopHandle = () => {
         line-height: 54px;
         width: 100%;
         font-size: 18px;
+    }
+
+    .input::placeholder {
+        color: rgba(white, 0.7);
     }
 }
 
