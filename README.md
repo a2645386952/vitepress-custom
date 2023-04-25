@@ -7,9 +7,9 @@ Added some features on the basis of  [vitepress](https://vitepress.vuejs.org)
 
 ## Features
 
-- nav：automatic generate the navigation bar based on the file directory
-- sidebar：automatic generate the sidebar based on the file directory
-- search：developing
+- Nav：Automatic generate the navigation bar based on the file directory
+- Sidebar：Automatic generate the sidebar based on the file directory
+- Search：Fuzzy match all article titles
 
 ## Usage
 
