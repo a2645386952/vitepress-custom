@@ -50,7 +50,7 @@ const hideSearchPopHandle = () => {
                 <input ref="refInput" class="input" placeholder="Search Docs" type="text" autofocus="true"
                     v-model="keywords" @input="inputChange">
                 <div class="result">
-                    <a :href="item.link.replace('docs', '').replace('.md', '')" @click="hideSearchPopHandle" class="item"
+                    <a :href="item.link.replace('example', '').replace('.md', '')" @click="hideSearchPopHandle" class="item"
                         v-for="(item, index) in result" :key="index">
                         <div class="contents">
                             <div class="title">{{ item.frontMatter.title }}</div>
