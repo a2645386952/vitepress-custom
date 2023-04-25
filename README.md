@@ -9,7 +9,11 @@ Added some features on the basis of  [vitepress](https://vitepress.vuejs.org)
 
 - Nav：Automatic generate the navigation bar based on the file directory
 - Sidebar：Automatic generate the sidebar based on the file directory
-- Search：Fuzzy match all article titles
+- Search：Fuzzy match all article titles. You can also follow the configuration of vitepress to access Algolia.
+
+## ToDo
+
+- Native CMS: Run a local CMS to make content management easier
 
 ## Usage
 
