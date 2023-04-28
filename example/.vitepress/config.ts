@@ -2,7 +2,7 @@ import navParser from '@vitepress-custom/vitepress-plugin-nav';
 import sidebar from '@vitepress-custom/vitepress-plugin-sidebar';
 import docsData from '@vitepress-custom/vitepress-plugin-fetch-docs';
 export default async () => {
-  let pages = await docsData();
+  const pages: any = await docsData();
   return {
     base: '/vitepress-custom/',
     title: 'vitepres-custom',

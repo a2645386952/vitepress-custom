@@ -24,10 +24,9 @@
   "license": "MIT",
   "author": "huyikai",
   "type": "module",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
-    "dist",
-    "index.js"
+    "dist"
   ],
   "scripts": {
     "build": "tsc"
