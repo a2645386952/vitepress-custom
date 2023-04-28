@@ -17,6 +17,6 @@ npm run dev
 
 <script setup>
   // use useData do something
-  import {useData} from 'vitepress';
-  console.log(useData())
+  // import {useData} from 'vitepress';
+  // console.log(useData())
 </script>
