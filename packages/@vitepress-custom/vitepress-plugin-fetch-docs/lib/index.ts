@@ -2,40 +2,50 @@ import fs from 'fs-extra';
 import globby from 'globby';
 import matter from 'gray-matter';
 
-// 排序
-const compareDate: any = (obj1: pageType, obj2: pageType) => {
-  return obj1.frontMatter.date < obj2.frontMatter.date ? 1 : -1;
-};
-interface pageType {
-  frontMatter: frontMatterType;
-  regularPath: string;
-  relativePath: string;
+// Define the page type
+interface Page {
+  frontMatter: FrontMatter;
+  link: string;
   content: string;
 }
-interface frontMatterType {
-  page: any;
-  date: any;
+
+// Define the front metadata type
+interface FrontMatter {
+  page?: any;
+  date?: any;
 }
-// 获取所有md文件
+
+// Compare date function
+const compareDate = (obj1: Page, obj2: Page) => {
+  return obj1.frontMatter.date < obj2.frontMatter.date ? 1 : -1;
+};
+
+// Export default function
 export default async () => {
+  // Get all markdown file paths
   const paths = await globby(['**.md'], {
-    ignore: ['node_modules', 'README.md', 'packages'] //忽略文件
+    ignore: ['node_modules', 'README.md', 'packages']
   });
-  let pages = await Promise.all(
+
+  // Read all markdown file contents and parse metadata
+  let pages: Page[] = await Promise.all(
     paths.map(async (item: string) => {
       const content = await fs.readFile(item, 'utf-8');
-      const { data } = matter(content);
-      let matterData = matter(content);
+      const matterData = matter(content);
       return {
         frontMatter: matterData.data,
         link: item,
-        content: matterData.content
-          .replace(/[^a-zA-Z0-9._ ]+/g, '')
-          .toLowerCase()
+        content: matterData.content.replace(/[^a-zA-Z0-9._ ]+/g, '').toLowerCase()
       };
     })
   );
-  pages = pages.filter((item: any) => !item.frontMatter.page);
+
+  // Filter out pages with frontMatter.page
+  pages = pages.filter((item: Page) => !item.frontMatter.page);
+
+  // Sort by date
   pages.sort(compareDate);
+
   return pages;
 };
+
