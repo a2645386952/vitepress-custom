@@ -16,6 +16,9 @@ export default async () => {
       logo: '/static/nav-logo.svg', //导航栏左侧头像
       lastUpdated: true, //最后更新时间
       outlineTitle: 'Catalog', //右侧 侧边栏标题
+      search: {
+        provider: 'local' // 离线搜索
+      },
       // 导航栏
       nav: [
         ...navParser(pages, 'contents'),
