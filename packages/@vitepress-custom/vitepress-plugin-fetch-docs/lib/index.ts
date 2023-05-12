@@ -2,50 +2,51 @@ import fs from 'fs-extra';
 import globby from 'globby';
 import matter from 'gray-matter';
 
-// Define the page type
+// 定义一个页面的接口 Define the interface of a page
 interface Page {
-  frontMatter: FrontMatter;
-  link: string;
-  content: string;
+  frontMatter: FrontMatter; // 页面的前置元数据
+  link: string; // 页面的链接
+  content: string; // 页面的内容
 }
 
-// Define the front metadata type
+// 定义页面的前置元数据的接口
 interface FrontMatter {
-  page?: any;
-  date?: any;
+  page?: any; // 页面的类型
+  date?: any; // 页面的日期
 }
 
-// Compare date function
+// 定义一个比较日期的函数
 const compareDate = (obj1: Page, obj2: Page) => {
-  return obj1.frontMatter.date < obj2.frontMatter.date ? 1 : -1;
+  return obj1.frontMatter.date < obj2.frontMatter.date ? 1 : -1; // 按照日期降序排序
 };
 
-// Export default function
+// 导出一个异步函数
 export default async () => {
-  // Get all markdown file paths
+  // 使用globby查找所有的md文件
   const paths = await globby(['**.md'], {
-    ignore: ['node_modules', 'README.md', 'packages']
+    ignore: ['node_modules', 'README.md', 'packages'] // 忽略的文件夹和文件
   });
 
-  // Read all markdown file contents and parse metadata
+  // 使用Promise.all并发读取所有md文件的内容
   let pages: Page[] = await Promise.all(
     paths.map(async (item: string) => {
-      const content = await fs.readFile(item, 'utf-8');
-      const matterData = matter(content);
+      const content = await fs.readFile(item, 'utf-8'); // 读取md文件的内容
+      const matterData = matter(content); // 解析md文件的内容
       return {
-        frontMatter: matterData.data,
-        link: item,
+        frontMatter: matterData.data, // 获取md文件的前置元数据
+        link: item, // 获取md文件的链接
+        // 将md文件内容中的非字母数字字符替换为空格，并转换为小写
         content: matterData.content.replace(/[^a-zA-Z0-9._ ]+/g, '').toLowerCase()
       };
     })
   );
 
-  // Filter out pages with frontMatter.page
+  // 过滤掉frontMatter中有page属性的Page
   pages = pages.filter((item: Page) => !item.frontMatter.page);
 
-  // Sort by date
+  // 根据日期排序
   pages.sort(compareDate);
 
-  return pages;
+  return pages; // 返回所有页面的数组
 };
 
