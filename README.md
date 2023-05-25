@@ -14,6 +14,7 @@ Added some features on the basis of  [vitepress](https://vitepress.vuejs.org)
 ## ToDo
 
 - Native CMS: Run a local CMS to make content management easier
+- Internationalization: Modify the Sidebar and Navbar methods to adapt to internationalization settings
 
 ## Usage
 

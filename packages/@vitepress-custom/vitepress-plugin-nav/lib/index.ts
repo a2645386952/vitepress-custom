@@ -1,7 +1,9 @@
 export default (list: Array<{ link: string }> = [], root: string = '') => {
-  let contents: Array<{}> = list.filter((i) => i.link.indexOf(`${root}/`) >= 0);
+  // 过滤出以root为根目录的所有内容
+  const contents: Array<{}> = list.filter((i) => i.link.includes(`${root}/`));
+  // 构建导航栏
   function buildNav(contents: any) {
-    let list: any = [];
+    let list: Array<any> = [];
     for (let a of contents) {
       let link = a.link.split(`${root}/`)[1];
       let urls = link.split('/');
@@ -17,7 +19,7 @@ export default (list: Array<{ link: string }> = [], root: string = '') => {
       }
     }
     // 排序
-    var compare = (obj1: any, obj2: any) => {
+    const compare = (obj1: any, obj2: any) => {
       var val1 = obj1.link;
       var val2 = obj2.link;
       if (val1 < val2) {
@@ -29,29 +31,29 @@ export default (list: Array<{ link: string }> = [], root: string = '') => {
       }
     };
     list = list.sort(compare);
-    // filter all content that has parent
+    // 过滤出所有有父级的内容
     let childrenList = list.filter((i: any) => i.parent);
-
-    // Remove duplicate content
-    function uniqueFunc(arr: any, uniId: any) {
+    // 去重
+    const uniqueFunc = (arr: any, uniId: any) => {
       const res = new Map();
       return arr.filter(
         (item: any) => !res.has(item[uniId]) && res.set(item[uniId], 1)
       );
-    }
+    };
     childrenList = uniqueFunc(childrenList, 'key');
-
-    // root directory
+    // 过滤出根目录下的内容
     let rootList: any = list.filter((i: any) => !i.parent);
-    rootList = uniqueFunc(rootList, 'key'); // unique
+    rootList = uniqueFunc(rootList, 'key'); // 去重
+    // 遍历根目录下的内容
     rootList.map((item: any) => {
       parseList(item);
     });
+    // 递归遍历所有内容，构建树形结构
     function parseList(parent: any): any {
       let children = childrenList.filter((i: any) => i.parent === parent.key);
       if (children.length > 0) {
         delete parent.link;
-        for (let item of children) {
+        for (const item of children) {
           parseList(item);
         }
         if (!parent.hasOwnProperty('items')) {

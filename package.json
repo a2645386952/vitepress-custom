@@ -1,13 +1,14 @@
 {
   "name": "vitepress-custom",
-  "description": "Development based on vitepress",
   "version": "0.0.4",
   "private": true,
+  "description": "Development based on vitepress",
   "keywords": [
     "vite",
     "vitepress",
     "vitepress-custom"
   ],
+  "homepage": "https://vitepress-custom.github.io/vitepress-custom/",
   "repository": {
     "type": "git",
     "url": "https://github.com/vitepress-custom/vitepress-custom"
